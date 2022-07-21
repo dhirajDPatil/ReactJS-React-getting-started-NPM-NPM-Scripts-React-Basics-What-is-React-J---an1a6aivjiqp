@@ -15,8 +15,8 @@ const App = () => {
   const onFormSubmitHandler = (event) => {
       event.preventDefault();
       setFormErrors(validate(formValues));
-      uName = 'Hello '+formValues.username;
-      // uName = 'Hello '+ formValues.email.split('@')[0];
+      // uName = 'Hello '+formValues.username;
+      uName = 'Hello '+ formValues.email.split('@')[0];
       setuserN(uName);
       setIsSubmit(true);
   }
@@ -62,12 +62,12 @@ const App = () => {
       <form onSubmit={onFormSubmitHandler}>
         <label>Name : </label>
         <input type="text" data-testid ='name' name="username" value={formValues.username} onChange={changeHandle} />
-        <p>{formErrors.username}</p>
+        {!(Object.keys(formErrors).length === 0 && isSubmit)  && <p>{formErrors.username}</p>}
         <br/><br/>
 
         <label>Email address : </label>
         <input data-testid ='email' name="email" value={formValues.email} onChange={changeHandle}/>
-        <p>{formErrors.email}</p>
+        {!(Object.keys(formErrors).length === 0 && isSubmit) && <p>{formErrors.email}</p>}
         <br/><br/>
 
         <label>Gender : </label>
@@ -77,17 +77,17 @@ const App = () => {
           <option>female</option>
           <option>others</option>
         </select>
-        <p>{formErrors.gender}</p>
+        {!(Object.keys(formErrors).length === 0 && isSubmit) && <p>{formErrors.gender}</p>}
         <br/><br/>
         
         <label>Phone Number : </label>
         <input type="tel" data-testid ='phoneNumber' name="phonenumber" value={formValues.phonenumber} onChange={changeHandle}/>
-        <p>{formErrors.phonenumber}</p>
+        {!(Object.keys(formErrors).length === 0 && isSubmit) && <p>{formErrors.phonenumber}</p>}
         <br/><br/>
 
         <label>Password : </label>
         <input type="password" data-testid = 'password' name="password" value={formValues.password} onChange={changeHandle}/>
-        <p>{formErrors.password}</p>
+        {!(Object.keys(formErrors).length === 0 && isSubmit) && <p>{formErrors.password}</p>}
         <br/><br/>
 
         <button data-testid = 'submit' type="submit">Submit button</button>

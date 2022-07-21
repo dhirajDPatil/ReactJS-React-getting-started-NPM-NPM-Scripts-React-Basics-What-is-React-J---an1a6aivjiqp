@@ -1,30 +1,25 @@
-import React, { useState, useEffect} from "react";
+import React, { useState} from "react";
 import '../styles/App.css';
 
 const App = () => {
-  const initialValues = { username: '', email: '', gender: '', phonenumber: '', password: ''};
-
+  const initialValues = { username: '', email: '', gender: 'male', phonenumber: '', password: ''};
+  let uName;
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [userN, setuserN] = useState('');
   const changeHandle = (e) => {
       const {name, value} = e.target;
-      // console.log(name, value);
       setFormValues({...formValues, [name] : value})
   }
   const onFormSubmitHandler = (event) => {
       event.preventDefault();
-      // console.log(formValues)
       setFormErrors(validate(formValues));
       setIsSubmit(true);
+      uName = formValues.email.split('@')[0];
+      setuserN(uName);
   }
 
-  useEffect(()=> {
-    console.log(formErrors);
-    if(Object.keys(formErrors).length === 0 && isSubmit){
-      console.log(formValues);
-    }
-  }, [formErrors])
 
   const validate = (values) => {
     const errors = {};
@@ -62,7 +57,7 @@ const App = () => {
   }
   return (
     <div id="main">
-      <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
+      {(Object.keys(formErrors).length === 0 && isSubmit) ? <h2>Hello {userN}</h2> : <></>}
       <form onSubmit={onFormSubmitHandler}>
         <label>Name : </label>
         <input type="text" data-testid ='name' name="username" value={formValues.username} onChange={changeHandle} />

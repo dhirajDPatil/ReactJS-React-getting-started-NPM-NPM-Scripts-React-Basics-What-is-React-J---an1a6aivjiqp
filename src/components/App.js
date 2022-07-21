@@ -16,8 +16,8 @@ const App = () => {
       event.preventDefault();
       setFormErrors(validate(formValues));
       setIsSubmit(true);
-      // uName = 'Hello '+formValues.username;
-      uName = 'Hello '+ formValues.email.split('@')[0];
+      uName = 'Hello '+formValues.username;
+      // uName = 'Hello '+ formValues.email.split('@')[0];
       setuserN(uName);
   }
 

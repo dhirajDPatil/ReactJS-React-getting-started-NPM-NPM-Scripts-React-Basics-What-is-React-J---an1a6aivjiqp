@@ -16,8 +16,8 @@ const App = () => {
       event.preventDefault();
       setFormErrors(validate(formValues));
       setIsSubmit(true);
-      uName = formValues.username;
-      // uName = formValues.email.split('@')[0];
+      // uName = 'Hello '+formValues.username;
+      uName = 'Hello '+ formValues.email.split('@')[0];
       setuserN(uName);
   }
 
@@ -58,7 +58,7 @@ const App = () => {
   }
   return (
     <div id="main">
-      {(Object.keys(formErrors).length === 0 && isSubmit) ? <h2>Hello {userN}</h2> : <></>}
+      {(Object.keys(formErrors).length === 0 && isSubmit) ? <h2>{userN}</h2> : <></>}
       <form onSubmit={onFormSubmitHandler}>
         <label>Name : </label>
         <input type="text" data-testid ='name' name="username" value={formValues.username} onChange={changeHandle} />
